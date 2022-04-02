@@ -56,7 +56,7 @@
         <select id="restaurant" title="음식점"></select>
         <select id="type" title="음식들의 종류" class="no_display"></select>
     </form>
-    <ul title="음식들"></ul>
+    <ul title="음식들" tabindex="0"></ul>
     <script>
         const restaurants=
         [
@@ -212,6 +212,7 @@
         [
             {name:'모니유부김밥 (기본야채김밥)',price:3500},
 			{name:'꼬마어린이김밥',price:3000},
+            {name:'돈까스김밥',price:4000},
             {name:'참치김밥',price:4000},
             {name:'치즈김밥',price:4000},
             {name:'김치김밥',price:4000},
@@ -510,16 +511,9 @@
             const item=document.createElement('li');
             list.appendChild(item);
             item.title='음식';
-
-            const paragraph_for_name=document.createElement('p');
-            item.appendChild(paragraph_for_name);
-            paragraph_for_name.title='음식의 이름';
-            paragraph_for_name.innerText=dish.name;
-
-            const paragraph_for_price=document.createElement('p');
-            item.appendChild(paragraph_for_price);
-            paragraph_for_price.title='음식의 가격';
-            paragraph_for_price.innerText=dish.price;
+            item.innerText=dish.name;
+            item.appendChild(document.createElement('br'));
+            item.appendChild(document.createTextNode(dish.price));
         }
 
         function append_items()
@@ -535,6 +529,8 @@
                     }
                 }
             }
+
+            list.focus({preventScroll:true});
         }
 
         selection_for_restaurant.addEventListener('change',function()

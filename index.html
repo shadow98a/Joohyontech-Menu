@@ -12,7 +12,7 @@
         {
             margin:0;
             padding:0;
-            font-size:4.545vw/*100/'왕 새우튀김 정식 (왕 새우튀김 3pcs + 돈까스)'.width vw*/;
+            font-size:4vw/*100/(li.padding.width+'왕 새우튀김 정식 (왕 새우튀김 3pcs + 돈까스)'.width+li.padding.width)vw*/;
             color:#FFFFFF;
         }
 
@@ -21,10 +21,20 @@
             background-color:#000000;
         }
 
+        form
+        {
+            position:fixed;
+            top:0;
+            width:100%;
+            border-bottom:0.125em/*1/(2^3)em*/ solid #FFFFFF;
+            background-color:#000000;
+        }
+
         select
         {
-            display:block;
-            border:0.1953125vh/*100*(1/(2^9))vh*/ solid #FFFFFF;
+            width:100%;
+            padding:1.5em/*3/(2^1)em*/;
+            border-bottom:0.0625em/*1/(2^4)em*/ solid #FFFFFF;
             background-color:transparent;
         }
 
@@ -35,13 +45,14 @@
 
         ul
         {
-            margin-top:2.34375vh/*3*100*(3/(2^7))vh*/;
+            margin-top:4.125em;/* (1.5em+1em+1.5em)+0.125em */
         }
 
         li
         {
             list-style-type:none;
-            border:0.1953125vh/*100*(1/(2^9))vh*/ solid #FFFFFF;
+            padding:1.5em/*3/(2^1)em*/;
+            border-top:0.0625em/*1/(2^4)em*/ solid #FFFFFF;
         }
 
         .no_display
@@ -49,6 +60,10 @@
             display:none;
         }
 
+        .margin_for_2_selections
+        {
+            margin-top:8.1875em;/* (1.5em+1em+1.5em+0.0625em)+(1.5em+1em+1.5em)+0.125em */
+        }
     </style>
 </head>
 <body>
@@ -494,10 +509,12 @@
             if(!selected_restaurant||selected_restaurant.types.length==1)
             {
                 selection_for_type.classList.add('no_display');
+                list.classList.remove('margin_for_2_selections');
                 return;
             }
 
             selection_for_type.classList.remove('no_display');
+            list.classList.add('margin_for_2_selections');
             const types=selected_restaurant.types;
             append_option(selection_for_type,null,'모든 종류들');
             for(let index=0;index<types.length;index++)
@@ -511,6 +528,7 @@
             const item=document.createElement('li');
             list.appendChild(item);
             item.title='음식';
+            item.tabIndex='0';
             item.innerText=dish.name;
             item.appendChild(document.createElement('br'));
             item.appendChild(document.createTextNode(dish.price));
@@ -530,13 +548,14 @@
                 }
             }
 
-            list.focus({preventScroll:true});
+            list.focus();
+            window.scrollTo(0,0);
         }
 
         selection_for_restaurant.addEventListener('change',function()
         {
             const value=selection_for_restaurant.value;
-            selected_restaurant=!value?null:restaurants[value];
+            selected_restaurant=value=='null'?null:restaurants[value];
             selected_type=null;
             append_options_for_types();
             append_items();
@@ -545,7 +564,7 @@
         selection_for_type.addEventListener('change',function()
         {
             const value=selection_for_type.value;
-            selected_type=!value?null:selected_restaurant.types[value];
+            selected_type=value=='null'?null:selected_restaurant.types[value];
             append_items();
         });
 

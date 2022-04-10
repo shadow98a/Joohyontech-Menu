@@ -64,12 +64,18 @@
         {
             margin-top:8.1875em;/* (1.5em+1em+1.5em+0.0625em)+(1.5em+1em+1.5em)+0.125em */
         }
+        
+        .margin_for_3_selections
+        {
+            margin-top:12.25em;/* (1.5em+1em+1.5em+0.0625em)+(1.5em+1em+1.5em+0.0625em)+(1.5em+1em+1.5em)+0.125em */
+        }
     </style>
 </head>
 <body>
     <form>
         <select id="restaurant" title="음식점"></select>
         <select id="type" title="음식들의 종류" class="no_display"></select>
+        <select id="coupon" title="식권" class="no_display"></select>
     </form>
     <ul title="음식들" tabindex="0"></ul>
     <script>
@@ -469,12 +475,55 @@
             {name:'김치찌개',price:7000}
         ];
 
+        restaurants[0].coupons=
+        [
+            {name:'저녁밥 식권',value:7000}
+        ];
+
+        restaurants[1].coupons=
+        [
+            {name:'저녁밥 식권',value:8000}
+        ];
+
+        restaurants[2].coupons=
+        [
+            {name:'아침밥 식권',value:4500},
+            {name:'저녁밥 식권',value:7000}
+        ];
+
+        restaurants[3].coupons=
+        [
+            {name:'저녁밥 식권',value:8500}
+        ];
+
+        restaurants[4].coupons=
+        [
+            {name:'저녁밥 식권',value:8000}
+        ];
+
+        restaurants[5].coupons=
+        [
+            {name:'저녁밥 식권',value:10000}
+        ];
+
+        restaurants[6].coupons=
+        [
+            {name:'저녁밥 식권',value:7000}
+        ];
+
+        restaurants[7].coupons=
+        [
+            {name:'저녁밥 식권',value:8000}
+        ];
+
         const selection_for_restaurant=document.querySelector('select#restaurant');
         const selection_for_type=document.querySelector('select#type');
+        const selection_for_coupon=document.querySelector('select#coupon');
         const list=document.querySelector('ul');
 
         let selected_restaurant=null;
         let selected_type=null;
+        let selected_coupon=null;
 
         function remove_children(node)
         {
@@ -509,17 +558,38 @@
             if(!selected_restaurant||selected_restaurant.types.length==1)
             {
                 selection_for_type.classList.add('no_display');
-                list.classList.remove('margin_for_2_selections');
+                list.classList.remove('margin_for_3_selections');
                 return;
             }
 
             selection_for_type.classList.remove('no_display');
-            list.classList.add('margin_for_2_selections');
+            list.classList.add('margin_for_3_selections');
             const types=selected_restaurant.types;
             append_option(selection_for_type,null,'모든 종류들');
             for(let index=0;index<types.length;index++)
             {
                 append_option(selection_for_type,index,types[index].name);
+            }
+        }
+
+        function append_options_for_coupons()
+        {
+            remove_children(selection_for_coupon);
+
+            if(!selected_restaurant)
+            {
+                selection_for_coupon.classList.add('no_display');
+                list.classList.remove('margin_for_2_selections');
+                return;
+            }
+
+            selection_for_coupon.classList.remove('no_display');
+            list.classList.add('margin_for_2_selections');
+            const coupons=selected_restaurant.coupons;
+            append_option(selection_for_coupon,null,'모든 음식들');
+            for(let index=0;index<coupons.length;index++)
+            {
+                append_option(selection_for_coupon,index,coupons[index].name+'으로써 살 수 있는 음식들');
             }
         }
 
@@ -543,7 +613,10 @@
                 {
                     for(let dish of type.dishes)
                     {
-                        append_item(dish);
+                        if(!selected_coupon||dish.price<=selected_coupon.value)
+                        {
+                            append_item(dish);
+                        }
                     }
                 }
             }
@@ -557,7 +630,9 @@
             const value=selection_for_restaurant.value;
             selected_restaurant=value=='null'?null:restaurants[value];
             selected_type=null;
+            selected_coupon=null;
             append_options_for_types();
+            append_options_for_coupons();
             append_items();
         });
 
@@ -565,6 +640,13 @@
         {
             const value=selection_for_type.value;
             selected_type=value=='null'?null:selected_restaurant.types[value];
+            append_items();
+        });
+
+        selection_for_coupon.addEventListener('change',function()
+        {
+            const value=selection_for_coupon.value;
+            selected_coupon=value=='null'?null:selected_restaurant.coupons[value];
             append_items();
         });
 

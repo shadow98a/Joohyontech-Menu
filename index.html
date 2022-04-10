@@ -589,7 +589,7 @@
             append_option(selection_for_coupon,null,'모든 음식들');
             for(let index=0;index<coupons.length;index++)
             {
-                append_option(selection_for_coupon,index,coupons[index].name+'으로써 살 수 있는 음식들');
+                append_option(selection_for_coupon,index,coupons[index].name+'('+coupons[index].value+')'+'으로써 살 수 있는 음식들');
             }
         }
 

@@ -45,7 +45,7 @@
 
         ul
         {
-            margin-top:4.125em;/* (1.5em+1em+1.5em)+0.125em */
+            margin-top:8.1875em;/* (1.5em+1em+1.5em+0.0625em)+(1.5em+1em+1.5em)+0.125em */
         }
 
         li
@@ -59,11 +59,6 @@
         {
             display:none;
         }
-
-        .margin_for_2_selections
-        {
-            margin-top:8.1875em;/* (1.5em+1em+1.5em+0.0625em)+(1.5em+1em+1.5em)+0.125em */
-        }
         
         .margin_for_3_selections
         {
@@ -75,7 +70,7 @@
     <form>
         <select id="restaurant" title="음식점"></select>
         <select id="type" title="음식들의 종류" class="no_display"></select>
-        <select id="coupon" title="식권" class="no_display"></select>
+        <select id="coupon" title="식권"></select>
     </form>
     <ul title="음식들" tabindex="0"></ul>
     <script>
@@ -93,58 +88,60 @@
 
         restaurants[0].types=
         [
-            {name:null}                 //0
+            {name:null},                        //0
+            {name:'주류'},                      //1
+            {name:'델리 스페샬(Dally Special)'} //2
         ];
 
         restaurants[1].types=
         [
-            {name:'면류'},              //0
-            {name:'밥류'},              //1
-            {name:'요리류'},            //2
-            {name:'주류'},              //3
-            {name:'탕수육세트'}         //4
+            {name:'면류'},                      //0
+            {name:'밥류'},                      //1
+            {name:'요리류'},                    //2
+            {name:'주류'},                      //3
+            {name:'탕수육세트'}                 //4
         ];
 
         restaurants[2].types=
         [
-            {name:null}                 //0
+            {name:null}                         //0
         ];
 
         restaurants[3].types=
         [
-            {name:'점심, 저녁 식사'},   //0
-            {name:'막걸리'},            //1
-            {name:'맑은 술'},           //2
-            {name:'내린 술'},           //3
-            {name:'산해진미'},          //4
-            {name:'식전방장'}           //5
+            {name:'점심, 저녁 식사'},           //0
+            {name:'막걸리'},                    //1
+            {name:'맑은 술'},                   //2
+            {name:'내린 술'},                   //3
+            {name:'산해진미'},                  //4
+            {name:'식전방장'}                   //5
         ];
 
         restaurants[4].types=
         [
-            {name:null}                 //0
+            {name:null}                         //0
         ];
 
         restaurants[5].types=
         [
-            {name:'식사류'},            //0
-            {name:'안주류'},            //1
-            {name:'주류'}               //2
+            {name:'식사류'},                    //0
+            {name:'안주류'},                    //1
+            {name:'주류'}                       //2
         ];
 
         restaurants[6].types=
         [
-            {name:'세트메뉴'},          //0
-            {name:'유뷰초밥'},          //1
-            {name:'면류'},              //2
-            {name:'덮밥류'},            //3
-            {name:'사이드'},            //4
-            {name:'음료'}               //5
+            {name:'세트메뉴'},                  //0
+            {name:'유뷰초밥'},                  //1
+            {name:'면류'},                      //2
+            {name:'덮밥류'},                    //3
+            {name:'사이드'},                    //4
+            {name:'음료'}                       //5
         ];
 
         restaurants[7].types=
         [
-            {name:null}                 //0
+            {name:null}                         //0
         ];
 
         restaurants[0].types[0].dishes=
@@ -159,6 +156,18 @@
             {name:'소주',price:4000},
             {name:'맥주',price:4000},
             {name:'음료',price:2000},
+            {name:'왕 새우튀김 정식 (왕 새우튀김 3pcs + 돈까스)',price:9000}
+        ];
+
+        restaurants[0].types[1].dishes=
+        [
+            {name:'소주',price:4000},
+            {name:'맥주',price:4000},
+            {name:'음료',price:2000}
+        ];
+
+        restaurants[0].types[2].dishes=
+        [
             {name:'왕 새우튀김 정식 (왕 새우튀김 3pcs + 돈까스)',price:9000}
         ];
 
@@ -475,46 +484,36 @@
             {name:'김치찌개',price:7000}
         ];
 
-        restaurants[0].coupons=
+        const coupons=
         [
-            {name:'저녁밥 식권',value:7000}
+            '아침밥 식권',  //0
+            '저녁밥 식권'   //1
         ];
 
-        restaurants[1].coupons=
-        [
-            {name:'저녁밥 식권',value:8000}
-        ];
+        restaurants[0].values_of_coupons={};
+        restaurants[0].values_of_coupons[coupons[1]]=7000;
 
-        restaurants[2].coupons=
-        [
-            {name:'아침밥 식권',value:4500},
-            {name:'저녁밥 식권',value:7000}
-        ];
+        restaurants[1].values_of_coupons={};
+        restaurants[1].values_of_coupons[coupons[1]]=8000;
 
-        restaurants[3].coupons=
-        [
-            {name:'저녁밥 식권',value:8500}
-        ];
+        restaurants[2].values_of_coupons={};
+        restaurants[2].values_of_coupons[coupons[0]]=4500;
+        restaurants[2].values_of_coupons[coupons[1]]=7000;
 
-        restaurants[4].coupons=
-        [
-            {name:'저녁밥 식권',value:8000}
-        ];
+        restaurants[3].values_of_coupons={};
+        restaurants[3].values_of_coupons[coupons[1]]=8500;
 
-        restaurants[5].coupons=
-        [
-            {name:'저녁밥 식권',value:10000}
-        ];
+        restaurants[4].values_of_coupons={};
+        restaurants[4].values_of_coupons[coupons[1]]=8000;
 
-        restaurants[6].coupons=
-        [
-            {name:'저녁밥 식권',value:7000}
-        ];
+        restaurants[5].values_of_coupons={};
+        restaurants[5].values_of_coupons[coupons[1]]=10000;
 
-        restaurants[7].coupons=
-        [
-            {name:'저녁밥 식권',value:8000}
-        ];
+        restaurants[6].values_of_coupons={};
+        restaurants[6].values_of_coupons[coupons[1]]=7000;
+
+        restaurants[7].values_of_coupons={};
+        restaurants[7].values_of_coupons[coupons[1]]=8000;
 
         const selection_for_restaurant=document.querySelector('select#restaurant');
         const selection_for_type=document.querySelector('select#type');
@@ -568,7 +567,11 @@
             append_option(selection_for_type,null,'모든 종류들');
             for(let index=0;index<types.length;index++)
             {
-                append_option(selection_for_type,index,types[index].name);
+                const type=types[index];
+                if(type.name)
+                {
+                    append_option(selection_for_type,index,types[index].name);
+                }
             }
         }
 
@@ -576,20 +579,21 @@
         {
             remove_children(selection_for_coupon);
 
+            append_option(selection_for_coupon,null,'모든 음식들');
             if(!selected_restaurant)
             {
-                selection_for_coupon.classList.add('no_display');
-                list.classList.remove('margin_for_2_selections');
+                for(let coupon of coupons)
+                {
+                    append_option(selection_for_coupon,coupon,coupon+'으로써 살 수 있는 음식들');
+                }
+
                 return;
             }
 
-            selection_for_coupon.classList.remove('no_display');
-            list.classList.add('margin_for_2_selections');
-            const coupons=selected_restaurant.coupons;
-            append_option(selection_for_coupon,null,'모든 음식들');
-            for(let index=0;index<coupons.length;index++)
+            const values_of_coupons=selected_restaurant.values_of_coupons;
+            for(let coupon of Object.keys(values_of_coupons))
             {
-                append_option(selection_for_coupon,index,coupons[index].name+'('+coupons[index].value+')'+'으로써 살 수 있는 음식들');
+                append_option(selection_for_coupon,coupon,coupon+'('+values_of_coupons[coupon]+')'+'으로써 살 수 있는 음식들');
             }
         }
 
@@ -609,11 +613,12 @@
             remove_children(list);
             for(let restaurant of !selected_restaurant?restaurants:[selected_restaurant])
             {
+                const values_of_coupons=restaurant.values_of_coupons;
                 for(let type of !selected_type?restaurant.types:[selected_type])
                 {
                     for(let dish of type.dishes)
                     {
-                        if(!selected_coupon||dish.price<=selected_coupon.value)
+                        if(!selected_coupon||Object.keys(values_of_coupons).includes(selected_coupon)&&dish.price<=values_of_coupons[selected_coupon])
                         {
                             append_item(dish);
                         }
@@ -646,11 +651,12 @@
         selection_for_coupon.addEventListener('change',function()
         {
             const value=selection_for_coupon.value;
-            selected_coupon=value=='null'?null:selected_restaurant.coupons[value];
+            selected_coupon=value=='null'?null:value;
             append_items();
         });
 
         append_options_for_restaurants();
+        append_options_for_coupons();
         append_items();
     </script>
 </body>

@@ -88,58 +88,60 @@
 
         restaurants[0].types=
         [
-            {name:null}                 //0
+            {name:null},                        //0
+            {name:'주류'},                      //1
+            {name:'델리 스페샬(Dally Special)'} //2
         ];
 
         restaurants[1].types=
         [
-            {name:'면류'},              //0
-            {name:'밥류'},              //1
-            {name:'요리류'},            //2
-            {name:'주류'},              //3
-            {name:'탕수육세트'}         //4
+            {name:'면류'},                      //0
+            {name:'밥류'},                      //1
+            {name:'요리류'},                    //2
+            {name:'주류'},                      //3
+            {name:'탕수육세트'}                 //4
         ];
 
         restaurants[2].types=
         [
-            {name:null}                 //0
+            {name:null}                         //0
         ];
 
         restaurants[3].types=
         [
-            {name:'점심, 저녁 식사'},   //0
-            {name:'막걸리'},            //1
-            {name:'맑은 술'},           //2
-            {name:'내린 술'},           //3
-            {name:'산해진미'},          //4
-            {name:'식전방장'}           //5
+            {name:'점심, 저녁 식사'},           //0
+            {name:'막걸리'},                    //1
+            {name:'맑은 술'},                   //2
+            {name:'내린 술'},                   //3
+            {name:'산해진미'},                  //4
+            {name:'식전방장'}                   //5
         ];
 
         restaurants[4].types=
         [
-            {name:null}                 //0
+            {name:null}                         //0
         ];
 
         restaurants[5].types=
         [
-            {name:'식사류'},            //0
-            {name:'안주류'},            //1
-            {name:'주류'}               //2
+            {name:'식사류'},                    //0
+            {name:'안주류'},                    //1
+            {name:'주류'}                       //2
         ];
 
         restaurants[6].types=
         [
-            {name:'세트메뉴'},          //0
-            {name:'유뷰초밥'},          //1
-            {name:'면류'},              //2
-            {name:'덮밥류'},            //3
-            {name:'사이드'},            //4
-            {name:'음료'}               //5
+            {name:'세트메뉴'},                  //0
+            {name:'유뷰초밥'},                  //1
+            {name:'면류'},                      //2
+            {name:'덮밥류'},                    //3
+            {name:'사이드'},                    //4
+            {name:'음료'}                       //5
         ];
 
         restaurants[7].types=
         [
-            {name:null}                 //0
+            {name:null}                         //0
         ];
 
         restaurants[0].types[0].dishes=
@@ -154,6 +156,18 @@
             {name:'소주',price:4000},
             {name:'맥주',price:4000},
             {name:'음료',price:2000},
+            {name:'왕 새우튀김 정식 (왕 새우튀김 3pcs + 돈까스)',price:9000}
+        ];
+
+        restaurants[0].types[1].dishes=
+        [
+            {name:'소주',price:4000},
+            {name:'맥주',price:4000},
+            {name:'음료',price:2000}
+        ];
+
+        restaurants[0].types[2].dishes=
+        [
             {name:'왕 새우튀김 정식 (왕 새우튀김 3pcs + 돈까스)',price:9000}
         ];
 
@@ -553,7 +567,11 @@
             append_option(selection_for_type,null,'모든 종류들');
             for(let index=0;index<types.length;index++)
             {
-                append_option(selection_for_type,index,types[index].name);
+                const type=types[index];
+                if(type.name)
+                {
+                    append_option(selection_for_type,index,types[index].name);
+                }
             }
         }
 

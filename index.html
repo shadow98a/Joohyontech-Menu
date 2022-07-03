@@ -70,7 +70,7 @@
     <form>
         <select id="restaurant" title="음식점"></select>
         <select id="type" title="음식들의 종류" class="no_display"></select>
-        <select id="coupon" title="식권"></select>
+        <select id="coupon" title="식사 시간"></select>
     </form>
     <ul title="음식들" tabindex="0"></ul>
     <script>
@@ -99,7 +99,8 @@
             {name:'밥류'},                      //1
             {name:'요리류'},                    //2
             {name:'주류'},                      //3
-            {name:'탕수육세트'}                 //4
+            {name:'탕수육세트'},                //4
+            {name:'(여름계절메뉴)'}             //5
         ];
 
         restaurants[2].types=
@@ -127,7 +128,8 @@
         [
             {name:'식사류'},                    //0
             {name:'안주류'},                    //1
-            {name:'주류'}                       //2
+            {name:'주류'},                      //2
+            {name:'(여름계절메뉴)'}             //3
         ];
 
         restaurants[6].types=
@@ -137,7 +139,9 @@
             {name:'면류'},                      //2
             {name:'덮밥류'},                    //3
             {name:'사이드'},                    //4
-            {name:'음료'}                       //5
+            {name:'음료'},                      //5
+            {name:'(여름계절메뉴)'}             //6
+
         ];
 
         restaurants[7].types=
@@ -235,6 +239,13 @@
             {name:'탕수육+짬뽕2',price:22000}
         ];
 
+        restaurants[1].types[5].dishes=
+        [
+            {name:'콩국수',price:8000},
+            {name:'냉짬뽕',price:10000},
+            {name:'중국냉면',price:11000}
+        ];
+
         restaurants[2].types[0].dishes=
         [
             {name:'모니유부김밥 (기본야채김밥)',price:3500},
@@ -289,11 +300,10 @@
             {name:'해물순두부',price:9000},
             {name:'제육볶음 (쌈추가 1,500원)',price:8500},
             {name:'콩국수',price:10000},
-            {name:'콩물 한 잔',price:2000},
             {name:'하얀순두부',price:9000},
-            {name:'콩물포장',price:10000},
-            {name:'굴국밥',price:9500},
-            {name:'청국장',price:8500}
+            {name:'청국장',price:8500},
+            {name:'해물된장',price:8500},
+            {name:'콩물포장',price:12000},
         ];
 
         restaurants[3].types[1].dishes=
@@ -386,42 +396,51 @@
 
         restaurants[5].types[0].dishes=
         [
-            {name:'모듬구이',price:39000},
-            {name:'삼치구이 (대)',price:14000},
-            {name:'삼치구이 (소)',price:9500},
-            {name:'갈치구이',price:10000},
-            {name:'고등어구이',price:9500},
-            {name:'임연수구이',price:9500},
-            {name:'생대구탕',price:12000},
-            {name:'복탕',price:9000},
-            {name:'알탕',price:9000},
-            {name:'동태탕',price:8500},
-            {name:'해물 된장찌개',price:7500},
-            {name:'모듬초밥(15개)',price:15000},
-            {name:'회덮밥',price:9000},
-            {name:'알밥',price:6500}
+            {name:'모듬구이',price:42000},
+            {name:'삼치구이 (대)',price:15000},
+            {name:'삼치구이 (소)',price:10500},
+            {name:'갈치구이',price:11000},
+            {name:'고등어구이',price:10500},
+            {name:'임연수구이',price:10500},
+            {name:'생대구탕',price:13000},
+            {name:'복탕',price:10000},
+            {name:'알탕',price:10000},
+            {name:'동태탕',price:9000},
+            {name:'해물된장',price:8500},
+            {name:'알밥',price:8000},
+            {name:'회덮밥',price:10000}
         ];
 
         restaurants[5].types[1].dishes=
         [
-            {name:'참치스페셜코스(1인)',price:60000},
-            {name:'참치회(A) (24점)',price:59000},
-            {name:'모듬회 (24점)',price:39000},
-            {name:'모듬회 추가 (10점)',price:12000},
-            {name:'혼마구로오토로 (1점)',price:4000},
-            {name:'혼마구로주토로 (1점)',price:2000},
-            {name:'회와 초밥',price:25000},
-            {name:'새우야채튀김(오후 5시 이후 가능)',price:20000}
+            {name:'참치스페샬 1인분 (2인이상 샐러드,초밥,구이,새우튀김,알밥)',price:60000},
+            {name:'참치 한접시',price:65000},
+            {name:'모듬회 한접시',price:45000},
+            {name:'모듬회 추가 (10점)',price:15000},
+            {name:'혼마구로오토로 (1점)',price:5500},
+            {name:'주토로 주도로 (1점)',price:3500},
+            {name:'회와초밥',price:28000},
+            {name:'새우야채튀김',price:25000}
         ];
 
         restaurants[5].types[2].dishes=
         [
-            {name:'소주',price:4000},
-            {name:'맥주',price:4000},
-            {name:'클라우드',price:4500},
+            {name:'소주',price:4500},
+            {name:'맥주',price:5000},
             {name:'막걸리',price:4000},
-            {name:'청하',price:5000},
+            {name:'청하',price:5500},
+            {name:'화탕',price:9000},
+            {name:'복분자',price:12000},
             {name:'음료',price:2000}
+        ];
+
+        restaurants[5].types[3].dishes=
+        [
+            {name:'갑오징어 숙회 1마리',price:17000},
+            {name:'갑오징어 숙회 2마리',price:30000},
+            {name:'갑오징어+문어 숙회 700g',price:30000},
+            {name:'문어 숙회 200g',price:15000},
+            {name:'문어 숙회 500g',price:30000}
         ];
 
         restaurants[6].types[0].dishes=
@@ -481,6 +500,12 @@
             {name:'웰치스포도',price:1500}
         ];
 
+        restaurants[6].types[6].dishes=
+        [
+            {name:'냉모밀',price:7000},
+            {name:'냉우동',price:7000}
+        ];
+
         restaurants[7].types[0].dishes=
         [
             {name:'全州 콩나물 국밥',price:7000},
@@ -490,8 +515,8 @@
 
         const coupons=
         [
-            '아침밥 식권',  //0
-            '저녁밥 식권'   //1
+            '아침',  //0
+            '저녁'   //1
         ];
 
         restaurants[0].values_of_coupons={};
@@ -588,7 +613,7 @@
             {
                 for(let coupon of coupons)
                 {
-                    append_option(selection_for_coupon,coupon,coupon+'으로써 살 수 있는 음식들');
+                    append_option(selection_for_coupon,coupon,coupon+'에 살 수 있는 음식들');
                 }
 
                 return;
@@ -597,7 +622,7 @@
             const values_of_coupons=selected_restaurant.values_of_coupons;
             for(let coupon of Object.keys(values_of_coupons))
             {
-                append_option(selection_for_coupon,coupon,coupon+'('+values_of_coupons[coupon]+')'+'으로써 살 수 있는 음식들');
+                append_option(selection_for_coupon,coupon,coupon+'('+values_of_coupons[coupon]+')'+'에 살 수 있는 음식들');
             }
         }
 
